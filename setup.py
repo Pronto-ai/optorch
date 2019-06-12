@@ -70,7 +70,7 @@ class CMakeBuild(build_ext):
 
 setup(
     name='optorch',
-    version='0.0.1',
+    version='0.0.3',
     description='Nonlinear solver for PyTorch',
     long_description='See: https://github.com/pronto-ai/optorch',
     long_description_content_type='text/plain',

@@ -6,8 +6,8 @@ RUN apt-get update && apt-get install -y patchelf
 
 RUN mkdir /optorch
 WORKDIR /optorch
-COPY dist/optorch-0.0.1-cp37-cp37m-linux_x86_64.whl .
-RUN pip install optorch-0.0.1-cp37-cp37m-linux_x86_64.whl
+COPY dist/optorch-0.0.2-cp37-cp37m-manylinux1_x86_64.whl .
+RUN pip install optorch-0.0.2-cp37-cp37m-manylinux1_x86_64.whl
 
 COPY examples/rosenbrock.py .
 
