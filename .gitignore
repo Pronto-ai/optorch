@@ -1,0 +1,9 @@
+bin/
+build/
+**/__pycache__
+dist/
+optorch.egg-info/
+bench/*.g2o
+bench/*.data
+**/*.prof*
+optorch/main
