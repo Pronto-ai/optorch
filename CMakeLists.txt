@@ -14,13 +14,13 @@ target_compile_definitions(main PRIVATE DISABLE_EASY_PROFILER=1)
 
 target_include_directories(main PUBLIC "${EIGEN3_INCLUDE_DIR}")
 target_include_directories(main PUBLIC "${TORCH_PATH}/include")
-target_include_directories(main PUBLIC $ENV{HOME}/repos/ceres-solver/build/config)
-target_include_directories(main PUBLIC $ENV{HOME}/repos/ceres-solver/include)
+target_include_directories(main PUBLIC /ceres/ceres-solver/build/config)
+target_include_directories(main PUBLIC /ceres/ceres-solver/include)
 
 target_link_libraries(main PUBLIC
 "-L${TORCH_PATH}/lib"
 -ltorch -lcaffe2 -lc10
-$ENV{HOME}/repos/ceres-solver/build/lib/libceres.a
+/ceres/ceres-solver/build/lib/libceres.a
 /usr/lib/x86_64-linux-gnu/libcholmod.a
 /usr/lib/lapack/liblapack.a
 /usr/lib/libblas/libblas.a
