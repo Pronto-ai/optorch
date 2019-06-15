@@ -14,6 +14,7 @@
 
 #include <ceres/ceres.h>
 #include <glog/logging.h>
+#include "angle_local_parameterization.h"
 
 // #define DISABLE_EASY_PROFILER
 #include <easy/profiler.h>
@@ -260,6 +261,9 @@ main(int argc, char *argv[])
         std::string name = it.value();
         if (name == "quat") {
             auto lp = new ceres::QuaternionParameterization();
+            problem.SetParameterization(params[pidx], lp);
+        } else if (name == "angle") {
+            auto lp = AngleLocalParameterization::Create();
             problem.SetParameterization(params[pidx], lp);
         } else {
             throw std::runtime_error("bad local param");

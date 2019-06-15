@@ -12,7 +12,7 @@ main_binary = this_file.parent / 'main'
 def _full_name(obj):
     return obj.__class__.__module__ + '.' + obj.__class__.__name__
 
-VALID_LOCAL_PARAMS = set(['quat'])
+VALID_LOCAL_PARAMS = set(['quat', 'angle'])
 
 class ScriptFunctionCost:
     def __init__(self, fn):
@@ -118,8 +118,14 @@ class Problem:
     def set_local_parameterization(self, param, name):
         """Sets the local parameterization for a parameter.
 
+        Supported parameterizations:
+        
+            quat: Quaternion in [w,x,y,z] format
+
+            angle: Angle constrained to [-pi, pi)
+
         Args:
-            name: Only 'quat' is supported.
+            name: One of ('quat', 'angle').
         """
         if param not in self.param_map:
             raise RuntimeError('param doesnt exist!')

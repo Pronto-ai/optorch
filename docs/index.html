@@ -84,9 +84,14 @@ Jacobian and solving the linear system. Default is 1.</p>
 <dt id="optorch.Problem.set_local_parameterization">
 <code class="sig-name descname">set_local_parameterization</code><span class="sig-paren">(</span><em class="sig-param">param</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#optorch.Problem.set_local_parameterization" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sets the local parameterization for a parameter.</p>
+<p>Supported parameterizations:</p>
+<blockquote>
+<div><p>quat: Quaternion in [w,x,y,z] format</p>
+<p>angle: Angle constrained to [-pi, pi)</p>
+</div></blockquote>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>name</strong> – Only ‘quat’ is supported.</p>
+<dd class="field-odd"><p><strong>name</strong> – One of (‘quat’, ‘angle’).</p>
 </dd>
 </dl>
 </dd></dl>
