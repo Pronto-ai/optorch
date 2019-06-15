@@ -67,7 +67,12 @@ class DistanceFromCircleCost(torch.jit.ScriptModule):
         # nicer, more convex loss compared to r - sqrt(xp^2 + yp^2)
         return r*r - xp*xp - yp*yp
 
-pts = # generate noisy circle points
+pts = # generate noisy circle points at (20, -300) radius = 45
+# initial estimates
+x = torch.tensor(0.)
+y = torch.tensor(0.)
+# parameterize radius as m^2 so it can't be negative
+m = torch.tensor(1.)
 for xx, yy in pts:
     cost = DistanceFromCircleCost(torch.tensor([xx]), torch.tensor([yy]))
     problem.add_residual(cost, x, y, m)
