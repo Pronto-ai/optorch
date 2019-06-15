@@ -1,0 +1,26 @@
+optorch.Problem
+===============
+
+.. currentmodule:: optorch
+
+.. autoclass:: Problem
+
+   
+   .. automethod:: __init__
+
+   
+   .. rubric:: Methods
+
+   .. autosummary::
+   
+      ~Problem.__init__
+      ~Problem.add_residual
+      ~Problem.description
+      ~Problem.set_local_parameterization
+      ~Problem.solve
+   
+   
+
+   
+   
+   

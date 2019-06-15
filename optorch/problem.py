@@ -9,13 +9,7 @@ import subprocess
 this_file = Path(__file__).resolve()
 main_binary = this_file.parent / 'main'
 
-def index_obj(iterable, obj):
-    for i, other_obj in enumerate(iterable):
-        if hash(obj) == hash(other_obj) and obj is other_obj:
-            return i
-    return -1
-
-def full_name(obj):
+def _full_name(obj):
     return obj.__class__.__module__ + '.' + obj.__class__.__name__
 
 VALID_LOCAL_PARAMS = set(['quat'])
@@ -27,6 +21,18 @@ class ScriptFunctionCost:
         return self.fn(*args)
 
 class Problem:
+    """A nonlinear optimization problem.
+
+    Attributes:
+        num_threads: How many threads Ceres will use, both for evaluating the
+            Jacobian and solving the linear system. Default is 1.
+        max_iterations: Default is 10.
+        function_tolerance: Default is float64 epsilon.
+        gradient_tolerance: Default is float64 epsilon.
+        parameter_tolerance: Default is float64 epsilon.
+        linear_solver: One of ('dense_qr', 'sparse_normal_cholesky'). Default is 'dense_qr'.
+    """
+
     def __init__(self):
         self.modules = {}
         self.module_num_residuals = {}
@@ -44,7 +50,6 @@ class Problem:
     def add_residual(self, cost_fn, *params):
         pidxs = []
         for p in params:
-            # pidx = index_obj(self.params, p)
             if p in self.param_map:
                 pidx = self.param_map[p]
             else:
@@ -53,7 +58,7 @@ class Problem:
                 self.param_map[p] = pidx
             pidxs.append(pidx)
 
-        module_name = full_name(cost_fn)
+        module_name = _full_name(cost_fn)
         if module_name in self.modules:
             num_residuals = self.module_num_residuals[module_name]
         else:
@@ -82,7 +87,7 @@ class Problem:
             'num_residuals': num_residuals,
         })
 
-    def description(self):
+    def _description(self):
         kept_keys = ['name', 'module', 'constant_params', 'pidxs', 'num_residuals']
         cost_fns = [{k: cost_fn[k] for k in kept_keys} for cost_fn in self.cost_fns]
         params = []
@@ -109,16 +114,22 @@ class Problem:
             },
             'local_params': self.local_params,
         }
-    def set_local_parameterization(self, p, name):
-        if p not in self.param_map:
+
+    def set_local_parameterization(self, param, name):
+        """Sets the local parameterization for a parameter.
+
+        Args:
+            name: Only 'quat' is supported.
+        """
+        if param not in self.param_map:
             raise RuntimeError('param doesnt exist!')
-        pidx = self.param_map[p]
+        pidx = self.param_map[param]
         assert name in VALID_LOCAL_PARAMS
         self.local_params[pidx] = name
 
     def solve(self, verbose=False, abort=False):
         with tempfile.TemporaryDirectory() as tmp:
-            desc = self.description()
+            desc = self._description()
             desc['options']['verbose'] = verbose
             with open(os.path.join(tmp, 'description.json'), 'w') as f:
                 json.dump(desc, f)

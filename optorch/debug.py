@@ -1,7 +1,7 @@
 import torch
 from graphviz import Digraph
 
-def size_to_str(size):
+def _size_to_str(size):
     return '('+','.join(['%d' % v for v in size])+')'
 
 _ANNOTATIONS = {}
@@ -16,7 +16,7 @@ def make_dot(var, params):
     def add_nodes(var):
         if var not in seen:
             if torch.is_tensor(var):
-                dot.node(str(id(var)), size_to_str(var.size()), fillcolor='orange')
+                dot.node(str(id(var)), _size_to_str(var.size()), fillcolor='orange')
             elif hasattr(var, 'variable'):
                 dot.node(str(id(var)), 'variable '+str(type(var).__name__), fillcolor='lightblue')
             else:

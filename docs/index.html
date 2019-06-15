@@ -1,0 +1,163 @@
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8" />
+    <title>OpTorch API &#8212; OpTorch  documentation</title>
+    <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+   
+  <link rel="stylesheet" href="_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <div class="section" id="optorch-api">
+<h1>OpTorch API<a class="headerlink" href="#optorch-api" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="optorch-problem">
+<h2>optorch.Problem<a class="headerlink" href="#optorch-problem" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="optorch.Problem">
+<em class="property">class </em><code class="sig-prename descclassname">optorch.</code><code class="sig-name descname">Problem</code><a class="headerlink" href="#optorch.Problem" title="Permalink to this definition">¶</a></dt>
+<dd><p>A nonlinear optimization problem.</p>
+<dl class="attribute">
+<dt id="optorch.Problem.num_threads">
+<code class="sig-name descname">num_threads</code><a class="headerlink" href="#optorch.Problem.num_threads" title="Permalink to this definition">¶</a></dt>
+<dd><p>How many threads Ceres will use, both for evaluating the
+Jacobian and solving the linear system. Default is 1.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="optorch.Problem.max_iterations">
+<code class="sig-name descname">max_iterations</code><a class="headerlink" href="#optorch.Problem.max_iterations" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default is 10.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="optorch.Problem.function_tolerance">
+<code class="sig-name descname">function_tolerance</code><a class="headerlink" href="#optorch.Problem.function_tolerance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default is float64 epsilon.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="optorch.Problem.gradient_tolerance">
+<code class="sig-name descname">gradient_tolerance</code><a class="headerlink" href="#optorch.Problem.gradient_tolerance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default is float64 epsilon.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="optorch.Problem.parameter_tolerance">
+<code class="sig-name descname">parameter_tolerance</code><a class="headerlink" href="#optorch.Problem.parameter_tolerance" title="Permalink to this definition">¶</a></dt>
+<dd><p>Default is float64 epsilon.</p>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="optorch.Problem.linear_solver">
+<code class="sig-name descname">linear_solver</code><a class="headerlink" href="#optorch.Problem.linear_solver" title="Permalink to this definition">¶</a></dt>
+<dd><p>One of (‘dense_qr’, ‘sparse_normal_cholesky’). Default is ‘dense_qr’.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="optorch.Problem.add_residual">
+<code class="sig-name descname">add_residual</code><span class="sig-paren">(</span><em class="sig-param">cost_fn</em>, <em class="sig-param">*params</em><span class="sig-paren">)</span><a class="headerlink" href="#optorch.Problem.add_residual" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="method">
+<dt id="optorch.Problem.set_local_parameterization">
+<code class="sig-name descname">set_local_parameterization</code><span class="sig-paren">(</span><em class="sig-param">param</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#optorch.Problem.set_local_parameterization" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sets the local parameterization for a parameter.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>name</strong> – Only ‘quat’ is supported.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="method">
+<dt id="optorch.Problem.solve">
+<code class="sig-name descname">solve</code><span class="sig-paren">(</span><em class="sig-param">verbose=False</em>, <em class="sig-param">abort=False</em><span class="sig-paren">)</span><a class="headerlink" href="#optorch.Problem.solve" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-optorch.debug">
+<span id="optorch-debug"></span><h2>optorch.debug<a class="headerlink" href="#module-optorch.debug" title="Permalink to this headline">¶</a></h2>
+<dl class="function">
+<dt id="optorch.debug.annotate">
+<code class="sig-prename descclassname">optorch.debug.</code><code class="sig-name descname">annotate</code><span class="sig-paren">(</span><em class="sig-param">var</em>, <em class="sig-param">name</em><span class="sig-paren">)</span><a class="headerlink" href="#optorch.debug.annotate" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="optorch.debug.make_dot">
+<code class="sig-prename descclassname">optorch.debug.</code><code class="sig-name descname">make_dot</code><span class="sig-paren">(</span><em class="sig-param">var</em>, <em class="sig-param">params</em><span class="sig-paren">)</span><a class="headerlink" href="#optorch.debug.make_dot" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="#">OpTorch</a></h1>
+
+
+
+
+
+
+
+
+
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">OpTorch API</a><ul>
+<li><a class="reference internal" href="#optorch-problem">optorch.Problem</a></li>
+<li><a class="reference internal" href="#module-optorch.debug">optorch.debug</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2019, Pronto AI.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 2.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="_sources/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

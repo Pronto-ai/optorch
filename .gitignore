@@ -7,3 +7,4 @@ bench/*.g2o
 bench/*.data
 **/*.prof*
 optorch/main
+docsrc/_build
