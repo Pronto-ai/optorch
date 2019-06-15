@@ -67,12 +67,13 @@ class DistanceFromCircleCost(torch.jit.ScriptModule):
         # nicer, more convex loss compared to r - sqrt(xp^2 + yp^2)
         return r*r - xp*xp - yp*yp
 
-pts = # generate noisy circle points...
+pts = # generate noisy circle points
 for xx, yy in pts:
     cost = DistanceFromCircleCost(torch.tensor([xx]), torch.tensor([yy]))
     problem.add_residual(cost, x, y, m)
 problem.max_iterations = 200
 problem.solve()
+# plot points and circles
 ```
 
 ![](/examples/results/circle_fit.png)
@@ -89,3 +90,11 @@ Results below are for 250, 500, and 1000 vertices. Y axis is translational error
 As you can see, OpTorch is quite a bit slower than g2opy, but consistently finds lower losses.
 If you're just doing SLAM, you probably want g2opy, but if you need custom loss functions, OpTorch will
 allow you to write them in Python.
+
+## Licenses
+
+The OpTorch codebase is released by Pronto AI under the MIT license.
+
+The binary packages available on PyPI are statically linked to:
+- [Ceres, which is under the BSD License](https://github.com/ceres-solver/ceres-solver/blob/master/LICENSE)
+- [SuiteSparse, the components of which are licensed under BSD or LGPL](https://github.com/jluttine/suitesparse/blob/master/LICENSE.txt)
