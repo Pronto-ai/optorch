@@ -4,6 +4,14 @@ Gradient descent not fast enough? Tired of managing memory and juggling template
 
 OpTorch lets you write your cost functions as PyTorch modules and seamlessly optimize them in [ceres](http://ceres-solver.org), Google's industrial strength solver. We use OpTorch for automatic ground-truthing at [Pronto](https://pronto.ai/), but there may be bugs or poor performance for use cases we haven't considered &mdash; we want to make OpTorch the fastest and easiest to use nonlinear solver frontend, so Issues and PRs are welcome!
 
+## Installation
+
+```shell
+pip install optorch
+```
+
+[API Docs](https://pronto-ai.github.io/optorch/)
+
 ## Examples
 
 Optimizing single parameter, single residual:
@@ -39,12 +47,6 @@ solved
 final x: 9.99999996667111
 ```
 
-## Installation
-
-```shell
-pip install optorch
-```
-
 ## Performance
 
 Benchmarks were run for pose graph optimization on the MIT Parking Garage dataset.
@@ -57,8 +59,3 @@ Results below are for 250, 500, and 1000 vertices. Y axis is translational error
 As you can see, OpTorch is quite a bit slower than g2opy, but consistently finds lower losses.
 If you're just doing SLAM, you probably want g2opy, but if you need custom loss functions, OpTorch will
 allow you to write them in Python.
-
-## Roadmap
-
-- Add tests! (and CI)
-- Add Sphinx documentation
