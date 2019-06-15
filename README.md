@@ -1,10 +1,8 @@
 # OpTorch
 
-:bangbang: **This is alpha release software! Here be dragons!**
-
 Gradient descent not fast enough? Tired of managing memory and juggling template parameters to interface with your favorite nonlinear solver in C++?
 
-OpTorch lets you write your cost functions as PyTorch modules and seamlessly optimize them in [ceres](http://ceres-solver.org), Google's industrial strength solver.
+OpTorch lets you write your cost functions as PyTorch modules and seamlessly optimize them in [ceres](http://ceres-solver.org), Google's industrial strength solver. We use OpTorch for automatic ground-truthing at [Pronto](https://pronto.ai/), but there may be bugs or poor performance for use cases we haven't considered &emdash; we want to make OpTorch the fastest and easiest to use nonlinear solver frontend, so Issues and PRs are welcome!
 
 ## Examples
 
