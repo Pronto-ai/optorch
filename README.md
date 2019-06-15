@@ -47,6 +47,36 @@ solved
 final x: 9.99999996667111
 ```
 
+Fitting a circle, snipped from [circle_fit.py](/examples/circle_fit.py):
+
+```python
+class DistanceFromCircleCost(torch.jit.ScriptModule):
+    def __init__(self, xx, yy):
+        super().__init__()
+        # constant parameters
+        self.xx = torch.nn.Parameter(xx)
+        self.yy = torch.nn.Parameter(yy)
+
+    @torch.jit.script_method
+    def forward(self, x, y, m):
+        # radius = m^2
+        r = m * m
+        # position of sample in circle's coordinate system
+        xp = self.xx - x
+        yp = self.yy - y
+        # nicer, more convex loss compared to r - sqrt(xp^2 + yp^2)
+        return r*r - xp*xp - yp*yp
+
+pts = # generate noisy circle points...
+for xx, yy in pts:
+    cost = DistanceFromCircleCost(torch.tensor([xx]), torch.tensor([yy]))
+    problem.add_residual(cost, x, y, m)
+problem.max_iterations = 200
+problem.solve()
+```
+
+![](/examples/results/circle_fit.png)
+
 ## Performance
 
 Benchmarks were run for pose graph optimization on the MIT Parking Garage dataset.
