@@ -9,10 +9,10 @@ WORKDIR /optorch
 ARG VERSION
 COPY dist/optorch-${VERSION}-cp37-cp37m-manylinux1_x86_64.whl .
 RUN pip install optorch-${VERSION}-cp37-cp37m-manylinux1_x86_64.whl
+RUN pip install matplotlib
 
 COPY examples/rosenbrock.py .
 COPY examples/circle_fit.py .
-RUN pip install matplotlib
 RUN mkdir -p results
 
 CMD ["python3.7", "rosenbrock.py"]

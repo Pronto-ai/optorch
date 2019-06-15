@@ -53,7 +53,7 @@ if __name__ == '__main__':
     problem.max_iterations = 200
     problem.solve(verbose=True, abort=False)
 
-    print('final:', x, y, m)
+    print('final:', x.item(), y.item(), m.item()*m.item())
 
     import matplotlib.pyplot as plt
     plt.scatter(pts[:,0], pts[:,1])

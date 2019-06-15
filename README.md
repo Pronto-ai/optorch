@@ -78,8 +78,11 @@ for xx, yy in pts:
     problem.add_residual(cost, x, y, m)
 problem.max_iterations = 200
 problem.solve()
-plt.scatter(pts[:,0], pts[:,1])
-# plot circles at (true_x, true_y) and (x.item(), y.item())
+print(f'final: {x.item()} {y.item()} {(m*m).item()}')
+```
+
+```
+final: 21.31574249267578 -301.0490417480469 45.86789997422807
 ```
 
 ![](/examples/results/circle_fit.png)
