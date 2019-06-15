@@ -1,0 +1,15 @@
+FROM python:3.7.3-stretch
+
+RUN apt-get update && apt-get install -y patchelf
+RUN pip install https://download.pytorch.org/whl/cu100/torch-1.1.0-cp37-cp37m-linux_x86_64.whl numpy
+
+RUN mkdir /optorch
+WORKDIR /optorch
+
+ARG VERSION
+COPY dist/optorch-${VERSION}-cp37-cp37m-manylinux1_x86_64.whl .
+RUN pip install optorch-${VERSION}-cp37-cp37m-manylinux1_x86_64.whl
+
+COPY examples/rosenbrock.py .
+
+CMD ["python3.7", "rosenbrock.py"]

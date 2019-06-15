@@ -68,9 +68,12 @@ class CMakeBuild(build_ext):
                               cwd=self.build_temp)
         shutil.copy2(os.path.join(self.build_temp, 'main'), extdir)
 
+with open(os.path.join(os.path.dirname(__file__), 'VERSION'), 'r') as f:
+    VERSION = f.read().strip()
+
 setup(
     name='optorch',
-    version='0.0.3',
+    version=VERSION,
     description='Nonlinear solver for PyTorch',
     long_description='See: https://github.com/pronto-ai/optorch',
     long_description_content_type='text/plain',

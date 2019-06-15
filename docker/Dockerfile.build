@@ -32,8 +32,8 @@ WORKDIR /ep
 RUN git clone https://github.com/yse/easy_profiler
 RUN mkdir /ep/easy_profiler/build
 WORKDIR /ep/easy_profiler/build
-RUN cmake ..
-RUN make install
+RUN cmake -DBUILD_SHARED_LIBS=OFF -DEASY_PROFILER_NO_GUI=ON -DEASY_PROFILER_NO_SAMPLES=ON ..
+RUN make
 
 RUN apt-get install -y libgoogle-glog-dev
 
@@ -44,4 +44,5 @@ RUN python3.7 setup.py build_ext
 RUN python3.7 setup.py bdist_wheel
 
 RUN mkdir /output
-RUN cp dist/optorch-0.0.3-cp37-cp37m-manylinux1_x86_64.whl /output/optorch-0.0.3-cp37-cp37m-manylinux1_x86_64.whl
+ARG VERSION
+RUN cp dist/optorch-${VERSION}-cp37-cp37m-manylinux1_x86_64.whl /output/optorch-${VERSION}-cp37-cp37m-manylinux1_x86_64.whl
